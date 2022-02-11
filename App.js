@@ -1,10 +1,17 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
   const [name, setName] = useState('Jerry Maguire')
   const [age, setAge]= useState('31')
   const [greeting, setGreeting]= useState('Namaste!')
+  const [persons, setPersons] = useState([
+    {name:'Jack', key:1},
+    {name:'Ethan', key:2},
+    {name:'Jerry', key:3},
+    {name:'Knight', key:4},
+    {name:'Bale', key:5},
+  ])
 
   const updateName = (name)=>{
     setName(name)
@@ -25,23 +32,22 @@ export default function App() {
       <Text>{greeting}</Text>
       
       <View style={styles.container}> 
-        <Text>Bio:</Text>
+          <Text>Bio:</Text>
 
-        <Text>Name is: {name}</Text>
-        <TextInput 
-          placeholder='Enter name'
-          onChangeText={(val)=> updateName(val)}
-          style={styles.input}
-        />
+          <Text>Name is: {name}</Text>
+          <TextInput 
+            placeholder='Enter name'
+            onChangeText={(val)=> updateName(val)}
+            style={styles.input}
+          />
 
-        <Text>Age is: {age}</Text>
-        <TextInput 
-          keyboardType='numeric'
-          placeholder='Enter age'
-          onChangeText={(val)=> updateAge(val)}
-          style={styles.input}
-        />
-
+          <Text>Age is: {age}</Text>
+          <TextInput 
+            keyboardType='numeric'
+            placeholder='Enter age'
+            onChangeText={(val)=> updateAge(val)}
+            style={styles.input}
+          />
       </View>
       
 
@@ -49,8 +55,25 @@ export default function App() {
         <Button title='update greeting' onPress={updateGreeting}/>
       </View>
 
+      {/* <ScrollView>
+        {persons && persons.map(person =>(
+            <View key={person.key}>
+              <Text style={styles.item}>
+                {person.name}
+              </Text>
+            </View>
+        ))
+        }
+      </ScrollView> */}
 
-     
+      <FlatList 
+        data={persons}
+        renderItem={({item})=>(
+          <Text style={styles.item}>
+            {item.name}
+          </Text>
+        )}
+      />
 
     </View>
   );
@@ -74,5 +97,11 @@ const styles = StyleSheet.create({
     margin:10,
     width:200,
     padding:8
-  }
+  },
+  item:{
+    backgroundColor:'pink',
+    margin:24,
+    padding:10,
+    fontSize:24
+  } 
 });
