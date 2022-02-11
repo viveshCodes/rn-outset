@@ -1,16 +1,19 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, 
+  TextInput, ScrollView, FlatList,
+  TouchableOpacity
+} from 'react-native';
 
 export default function App() {
   const [name, setName] = useState('Jerry Maguire')
   const [age, setAge]= useState('31')
   const [greeting, setGreeting]= useState('Namaste!')
   const [persons, setPersons] = useState([
-    {name:'Jack', key:1},
-    {name:'Ethan', key:2},
-    {name:'Jerry', key:3},
-    {name:'Knight', key:4},
-    {name:'Bale', key:5},
+    {name:'Jack', id:1},
+    {name:'Ethan', id:2},
+    {name:'Jerry', id:3},
+    {name:'Knight', id:4},
+    {name:'Bale', id:5},
   ])
 
   const updateName = (name)=>{
@@ -24,6 +27,14 @@ export default function App() {
 
   const updateGreeting = ()=>{
     setGreeting('Hare Krishna!')
+  }
+
+  const pressHandler = (id)=>{
+    setPersons((prevPersons)=>{
+      return(
+        prevPersons.filter((person)=> person.id !=id)
+      )
+    })
   }
 
   return (
@@ -55,23 +66,30 @@ export default function App() {
         <Button title='update greeting' onPress={updateGreeting}/>
       </View>
 
-      {/* <ScrollView>
+      <ScrollView>
         {persons && persons.map(person =>(
-            <View key={person.key}>
+            <View key={person.id}>
               <Text style={styles.item}>
                 {person.name}
               </Text>
             </View>
         ))
         }
-      </ScrollView> */}
+      </ScrollView>
 
       <FlatList 
+        keyExtractor={(item)=> (
+          item.id
+        )}
+        numColumns={3}
         data={persons}
         renderItem={({item})=>(
-          <Text style={styles.item}>
-            {item.name}
-          </Text>
+         <TouchableOpacity onPress={()=>pressHandler(item.id)}>
+            <Text style={styles.item}>
+              {item.name}
+            </Text>
+         </TouchableOpacity>
+          
         )}
       />
 
