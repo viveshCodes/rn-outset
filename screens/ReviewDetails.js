@@ -17,7 +17,7 @@ const ReviewDetails = ({route, navigation}) => {
         <Text>{title}</Text>
         <Text>{body}</Text>
         <View style={styles.rating}>
-          <Text>Rating: {rating}</Text>
+          <Text>Rating:</Text>
           <Image style={styles.image} source={globalImages.ratings[rating]} />
         </View>
       </Card>
@@ -30,9 +30,17 @@ export default ReviewDetails
 
 const styles = StyleSheet.create({
   image: {
-        flex: 1,
-        width: 15,
-        height: 10,
+        maxWidth: 100,
+        minWidth:50,
+        height: 'auto',
         resizeMode: 'contain'
+    },
+    rating:{
+      flexDirection:'row',
+      justifyContent:'center',
+      paddingTop:16,
+      marginTop:16,
+      borderTopWidth:1,
+      borderTopColor:'#eee'
     }
 })
