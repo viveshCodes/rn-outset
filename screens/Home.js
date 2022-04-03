@@ -73,5 +73,9 @@ const styles = StyleSheet.create({
   modalClose:{
     marginTop:20,
     marginBottom:0
+  },
+  modalContent:{
+    flex:1,
+    
   }
 })
