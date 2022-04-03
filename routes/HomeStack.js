@@ -26,7 +26,7 @@ const HomeStack = ({navigation}) => {
       }
     >
         <Stack.Screen 
-        name='Home'
+        name='Landing'
         component={Home}
         options={{
           headerTitle:'Movie Zone',

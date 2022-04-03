@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Button, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { globalStyles } from '../styles/GlobalStyles'
+import Card from '../shared/Card'
 
 const Home = ({navigation}) => {
 
@@ -23,7 +24,9 @@ const Home = ({navigation}) => {
             <TouchableOpacity
               onPress={()=>goToReviewDetails(item)}
             >
-              <Text style={styles.titleText}>{item.title}</Text>
+              <Card>
+                <Text style={globalStyles.titleText}>{item.title}</Text>
+              </Card>
             </TouchableOpacity>
           )}
         />
@@ -32,5 +35,3 @@ const Home = ({navigation}) => {
 }
 
 export default Home
-
-const styles = StyleSheet.create({})

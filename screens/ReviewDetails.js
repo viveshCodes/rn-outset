@@ -1,5 +1,6 @@
 import { Button, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Card from '../shared/Card'
 
 const ReviewDetails = ({route, navigation}) => {
 
@@ -7,13 +8,15 @@ const ReviewDetails = ({route, navigation}) => {
   const {title, body, rating} = route.params
 
   const goToHome = ()=>{
-    navigation.navigate('Home')
+    navigation.navigate('Landing')
   } 
   return (
     <View>
-      <Text>{title}</Text>
-      <Text>{body}</Text>
-      <Text>{rating}</Text>
+      <Card>
+        <Text>{title}</Text>
+        <Text>{body}</Text>
+        <Text>{rating}</Text>
+      </Card>
       <Button title='Go Home' onPress={goToHome} />
     </View>
   )
