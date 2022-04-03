@@ -1,125 +1,35 @@
-import React, {useState} from 'react'
-import { StyleSheet, Text, View, Button, 
-  TextInput, ScrollView, FlatList,
-  TouchableOpacity
-} from 'react-native';
+/*____________IMPORT STARTS_________*/ 
+// React and React Native
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
-export default function App() {
-  const [name, setName] = useState('Jerry Maguire')
-  const [age, setAge]= useState('31')
-  const [greeting, setGreeting]= useState('Namaste!')
-  const [persons, setPersons] = useState([
-    {name:'Jack', id:1},
-    {name:'Ethan', id:2},
-    {name:'Jerry', id:3},
-    {name:'Knight', id:4},
-    {name:'Bale', id:5},
-  ])
+// Expo
+import AppLoading from 'expo-app-loading'
+import { useFonts } from 'expo-font'
+import { NavigationContainer } from '@react-navigation/native'
 
-  const updateName = (name)=>{
-    setName(name)
-  }
+// Routes
+import HomeDrawer from './routes/HomeDrawer'
+/*________________IMPORT ENDS_______________________*/ 
 
-  const updateAge = (val)=>{
-    setAge(val)
+const App = () => {
+  const [fontsLoaded] = useFonts({
+    'nunito-regular':require('./assets/fonts/Nunito-Regular.ttf'),
+    'nunito-bold':require('./assets/fonts/Nunito-Bold.ttf')
+  })
 
-  }
-
-  const updateGreeting = ()=>{
-    setGreeting('Hare Krishna!')
-  }
-
-  const pressHandler = (id)=>{
-    setPersons((prevPersons)=>{
-      return(
-        prevPersons.filter((person)=> person.id !=id)
-      )
-    })
+  if(!fontsLoaded){
+    return(
+      <AppLoading />
+    )
   }
 
   return (
-    <View style={styles.container}>
-      
-      <Text>{greeting}</Text>
-      
-      <View style={styles.container}> 
-          <Text>Bio:</Text>
+    <NavigationContainer>
+      <HomeDrawer />
+    </NavigationContainer>
+  )
 
-          <Text>Name is: {name}</Text>
-          <TextInput 
-            placeholder='Enter name'
-            onChangeText={(val)=> updateName(val)}
-            style={styles.input}
-          />
-
-          <Text>Age is: {age}</Text>
-          <TextInput 
-            keyboardType='numeric'
-            placeholder='Enter age'
-            onChangeText={(val)=> updateAge(val)}
-            style={styles.input}
-          />
-      </View>
-      
-
-      <View style={styles.buttonContainer}>
-        <Button title='update greeting' onPress={updateGreeting}/>
-      </View>
-
-      <ScrollView>
-        {persons && persons.map(person =>(
-            <View key={person.id}>
-              <Text style={styles.item}>
-                {person.name}
-              </Text>
-            </View>
-        ))
-        }
-      </ScrollView>
-
-      <FlatList 
-        keyExtractor={(item)=> (
-          item.id
-        )}
-        numColumns={3}
-        data={persons}
-        renderItem={({item})=>(
-         <TouchableOpacity onPress={()=>pressHandler(item.id)}>
-            <Text style={styles.item}>
-              {item.name}
-            </Text>
-         </TouchableOpacity>
-          
-        )}
-      />
-
-    </View>
-  );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  buttonContainer:{
-    marginTop:20
-  },
-
-  input:{
-    borderWidth:1,
-    borderColor:'#777',
-    margin:10,
-    width:200,
-    padding:8
-  },
-  item:{
-    backgroundColor:'pink',
-    margin:24,
-    padding:10,
-    fontSize:24
-  } 
-});
+export default App
