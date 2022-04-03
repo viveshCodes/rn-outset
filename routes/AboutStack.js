@@ -28,8 +28,8 @@ const AboutStack = ({navigation}) => {
         name='About'
         component={About}
         options={{
-          headerTitle:'About',
-          headerLeft:()=> <CustomHeader navigation={navigation} />,
+          headerTitle:'',
+          header:()=> <CustomHeader navigation={navigation} title='About'/>,
         }}
         />
     </Stack.Navigator>

@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Home from '../screens/Home'
 import ReviewDetails from '../screens/ReviewDetails'
 import CustomHeader from '../shared/CustomHeader'
+import { ImageBackground, StyleSheet } from 'react-native'
 
 const Stack = createStackNavigator()
 
@@ -29,8 +30,8 @@ const HomeStack = ({navigation}) => {
         name='Landing'
         component={Home}
         options={{
-          headerTitle:'Movie Zone',
-          headerLeft:()=> <CustomHeader navigation={navigation} />,
+          headerTitle:'',
+          header:()=> <CustomHeader navigation={navigation} title='MovieZone' />,
         }}
         />
         <Stack.Screen 
@@ -42,3 +43,10 @@ const HomeStack = ({navigation}) => {
 }
 
 export default HomeStack
+
+const styles = StyleSheet.create({
+  headerBg:{
+    height:50,
+    width:'100%'
+  }
+})
