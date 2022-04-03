@@ -6,8 +6,8 @@ import Card from '../shared/Card'
 const Home = ({navigation}) => {
 
   const reviews = [
-    { title:'Peaky Blinders', body:'lorem ipsum', rating:9, key:1},
-    { title:'Jack Reacher', body:'lorem ipsum', rating:8, key:2}
+    { title:'Peaky Blinders', body:'lorem ipsum', rating:4, key:1},
+    { title:'Jack Reacher', body:'lorem ipsum', rating:3, key:2}
   ]
   const goToReviewDetails = (item)=>{
     navigation.navigate(

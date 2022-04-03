@@ -1,6 +1,7 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button, Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Card from '../shared/Card'
+import { globalImages } from '../styles/GlobalImages'
 
 const ReviewDetails = ({route, navigation}) => {
 
@@ -15,7 +16,10 @@ const ReviewDetails = ({route, navigation}) => {
       <Card>
         <Text>{title}</Text>
         <Text>{body}</Text>
-        <Text>{rating}</Text>
+        <View style={styles.rating}>
+          <Text>Rating: {rating}</Text>
+          <Image style={styles.image} source={globalImages.ratings[rating]} />
+        </View>
       </Card>
       <Button title='Go Home' onPress={goToHome} />
     </View>
@@ -24,4 +28,11 @@ const ReviewDetails = ({route, navigation}) => {
 
 export default ReviewDetails
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  image: {
+        flex: 1,
+        width: 15,
+        height: 10,
+        resizeMode: 'contain'
+    }
+})
