@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Modal } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard} from 'react-native'
 import React, { useState } from 'react'
 import { globalStyles } from '../styles/GlobalStyles'
 import Card from '../shared/Card'
 import {MaterialIcons} from '@expo/vector-icons'
+import ReviewForm from './ReviewForm'
 
 const Home = ({navigation}) => {
 
   const [modalVisible, setModalVisible] = useState(false)
+  const [reviews, setReviews] = useState([
+       { title:'Peaky Blinders', body:'lorem ipsum', rating:4, key:1},
+       { title:'Jack Reacher', body:'lorem ipsum', rating:3, key:2}
+     ])
 
-  const reviews = [
-    { title:'Peaky Blinders', body:'lorem ipsum', rating:4, key:1},
-    { title:'Jack Reacher', body:'lorem ipsum', rating:3, key:2}
-  ]
   const goToReviewDetails = (item)=>{
     navigation.navigate(
       'ReviewDetails',
@@ -19,23 +20,30 @@ const Home = ({navigation}) => {
     )
   }
 
+  const addReview = (review) =>{
+    review.key = Math.random()
+    setReviews((currentReviews)=>{
+      return [review, ...currentReviews]
+    })
+    setModalVisible(false)
+  }
   return (
     <View>
       <Modal 
         visible={modalVisible}
         animationType='slide'
       >
-        <View style={StyleSheet.modalContent}>
-            <MaterialIcons 
-              name='close' 
-              size={24} 
-              onPress={()=>setModalVisible(false)}
-              style={[styles.modalToggle, styles.modalClose]}
-            />
-          <Text>
-            Hello from the modal
-          </Text>
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.modalContent}>
+              <MaterialIcons 
+                name='close' 
+                size={24} 
+                onPress={()=>setModalVisible(false)}
+                style={[styles.modalToggle, styles.modalClose]}
+              />
+              <ReviewForm addReview={addReview}/>
+          </View>
+        </TouchableWithoutFeedback>
       </Modal>
       <MaterialIcons 
         name='add' 
