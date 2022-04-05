@@ -41,7 +41,8 @@ const ReviewForm = ({addReview}) => {
                   />
                   <Text style={globalStyles.errorText}>{formikProps.touched.title && formikProps.errors.title}</Text>
                 <TextInput 
-                    multiline
+                    multiline 
+                    minHeight={60}
                     style={globalStyles.input}
                     placeholder='Review body'
                     onChangeText={formikProps.handleChange('body')}
